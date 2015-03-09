@@ -1,0 +1,18 @@
+Notes: General Responsibility Assignment Software Patterns By Craig Larman
+
+GRASP: A Learning Aid for OO Design with Responsabilities
+
+587
+
+
+587
+587
+"the critical design tool for software development is a mind well educated in design principles. It is not the UML or any other technology." -- Craig Larman
+
+LRG: Low Representational Gap
+
+Responsability Driven Design (RDD): Thinking about how to assign responsibilities to collaborating objects
+    |_ Responsabilities (Doing & Knowing): Are related to the obligations or behavior of an object in terms of its role
+    |_ Roles
+    |_ Collaborations
+
