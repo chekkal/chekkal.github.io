@@ -1,18 +1,44 @@
-Notes: General Responsibility Assignment Software Patterns By Craig Larman
+Book: General Responsibility Assignment Software Patterns By Craig Larman
 
 GRASP: A Learning Aid for OO Design with Responsabilities
 
-587
-
-
-587
-587
 "the critical design tool for software development is a mind well educated in design principles. It is not the UML or any other technology." -- Craig Larman
 
 LRG: Low Representational Gap
+
+Domain Model -- LRG --> Design Model
 
 Responsability Driven Design (RDD): Thinking about how to assign responsibilities to collaborating objects
     |_ Responsabilities (Doing & Knowing): Are related to the obligations or behavior of an object in terms of its role
     |_ Roles
     |_ Collaborations
 
+Model-View Separation Principle: Model (domain) objects should not have direct knowledge of view (UI) objects, at least as view objects.
+
+GRASP defines nine basic OO design principles
+   |_ Information Expert
+      |_ Problem: What is a general principle of assigning responsibilities to objects?
+      |_ Solution: Assign a responsibility to the class that has the information necessary to fulfill it.
+   |_ Creator (relates to: Concrete Factory, Abstract Factory)
+      |_ Problem: Who creates an A?
+      |_ Solution: Assign class B the responsibility to create an instance of class A if one of these is true
+                   |_ B "contaiins" or compositely aggregates A
+		   |_ B records A
+		   |_ B closely uses A
+		   |_ B has the initializing data for A
+   |_ High Cohesion
+      |_ Problem: How to keep objects focused, understandable, and manageable, and as a side effect, support low coupling?
+      |_ Solution: Assign responsabilities  so that cohesion remains high. Use this to evaluate alternatives
+   |_ Low Coupling (coupling is a measure of how strongly one element is connected to, has knowledge of, or depends on other elements)
+      |_ Problem: How to reduce the impact of change?
+      |_ Solution: Assign responsibilities so that (unnecessary) coupling remains low. Use this principle to evaluate alternatives.
+   |_ Controller
+      |_ Problem: What first object beyond the UI layer receives and coordinates ("controls") a system operation
+      |_ Solution: Assign the responsibility to an object representing one of those choises:
+                   |_ Represents the overall "system," a "root object," a device that the software is running within, or a major subsystem (these are all variations of a facade controller)
+		   |_ Represents a use case scenario within witch the system operation occurs (a use case or session controller)
+
+
+
+Information Expert -- supports --> Low Coupling
+(Informatiion Expert -- vs -- Cohesion) -- implies --> Pure Fabrication
