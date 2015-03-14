@@ -26,7 +26,7 @@ GRASP defines nine basic OO design principles
 		   |_ B records A
 		   |_ B closely uses A
 		   |_ B has the initializing data for A
-   |_ High Cohesion
+   |_ High Cohesion (Informally Cohesion measures how functionally related the operations of a software element are, and also measures how much work a software element is doing)
       |_ Problem: How to keep objects focused, understandable, and manageable, and as a side effect, support low coupling?
       |_ Solution: Assign responsabilities  so that cohesion remains high. Use this to evaluate alternatives
    |_ Low Coupling (coupling is a measure of how strongly one element is connected to, has knowledge of, or depends on other elements)
@@ -42,3 +42,4 @@ GRASP defines nine basic OO design principles
 
 Information Expert -- supports --> Low Coupling
 (Informatiion Expert -- vs -- Cohesion) -- implies --> Pure Fabrication
+High Cohesion <-> Low Coupling
