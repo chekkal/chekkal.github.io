@@ -1,0 +1,3 @@
+Puppet: Configuration management tool.
+
+Vagrant: Automate the management and provisioning of development environments.

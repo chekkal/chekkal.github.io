@@ -4,6 +4,9 @@ merge/convert multiple pdf files into one pdf (http://stackoverflow.com)
 vi a gz file
     zcat filename.gz | vi -
 
+list of open ssh tunnels
+    lsof -i tcp | grep ^ssh
+
 
 
 
