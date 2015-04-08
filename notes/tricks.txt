@@ -7,7 +7,8 @@ vi a gz file
 list of open ssh tunnels
     lsof -i tcp | grep ^ssh
 
-
+start ssh-agent for msysgit Bash on Windows
+  eval `ssh-agent -s`; ssh-add
 
 
 

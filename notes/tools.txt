@@ -1,0 +1,7 @@
+HAproxy: A load balancing proxy server.
+
+Varnish: A web application accelerator (Cache Server).
+
+
+
+
