@@ -1,0 +1,14 @@
+HEAD points directly to commit, and is not symbolic reference to some local branch
+
+Display the branch name along woth its associated remote
+  git rev-parse --abbrev-ref @{u}
+
+Checkout a branch test that may belong to multiple remotes
+  git checkout -b remote_branch remote_name/remote_branch
+  or
+  git checkout -t [-b optional_name_for_local_branch] remote_name/remote_branch
+
+Delete a remote branch
+  git push origin --delete <branchName>
+  or
+  git push origin :<branchName>
