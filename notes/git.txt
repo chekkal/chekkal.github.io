@@ -12,3 +12,6 @@ Delete a remote branch
   git push origin --delete <branchName>
   or
   git push origin :<branchName>
+
+Interactive rebase without inflating merge commits
+  git rebase -i --preserve-merges  
