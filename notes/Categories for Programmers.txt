@@ -1,0 +1,86 @@
+Notes Taken from http://bartoszmilewski.com/ [Bartosz Milewski: Category Theory, Functional Programming, Haskell, Programming]
+
+A category consists of objects and arrows (morphisms). Arrows can be composed, and the composition is associative. Every object has an identity arrow that serves as a unit under composition.
+
+Category theory was invented as a bridge.
+
+Composition is the essence of category theory.
+
+A monoid is defined as a set with a binary operation which is associative and do have a neutral element.
+
+class Monoid m where
+  mempty  :: m
+  mappend :: m -> m -> m
+
+instance Monoid String where
+  mempty = ""
+  mappend = (++)
+
+Every Monoid can be described as a single object category with a set of morphisms that follow appropriate rules of composition.
+
+The initial object is the object that has one and only one morphism going to any object in the category.
+
+The terminal object is the object with one and only one morphism coming to it from any object in the category.
+
+A product of two objects a and b is the object c equipped with two projections such that for any other object c’ equipped with two projections there is a unique morphism m from c’ to c that factorizes those projections.
+
+A coproduct of two objects a and b is the object c equipped with two injections such that for any other object c’ equipped with two injections there is a unique morphism m from c to c’ that factorizes those injections.
+
+Unlike the canonical implementation of the product that is built into Haskell as the primitive pair, the canonical implementation of the coproduct is a data type called Either.
+
+We’ve seen two commutative monoidal structures underlying the type system: We have the sum types with Void as the neutral element, and the product types with the unit type, (), as the neutral element. We’d like to think of them as analogous to addition and multiplication. In this analogy, Void would correspond to zero, and unit, (), to one.
+
+Product Types: The canonical implementation of a product of two types in a programming language is a pair. In Haskell, a pair is a primitive type constructor; in C++ it’s a relatively complex template defined in the Standard Library.
+In Haskell you can alternatively define a Pair as: data Pair a b = P a b
+
+A product type with named fields is called a record in Haskell, and a struct in C.
+  data Element = Element { name         :: String , symbol       :: String , atomicNumber :: Int } is less error prone than (String, String, Int)
+
+Sum Types: The coproduct gives rise to sum types. The canonical implementation of a sum type in Haskell is: 
+    data Either a b = Left a | Right b
+In C++, those are tagged unions or enums
+
+A Haskell list type can be defined as a (recursive) sum type: List a = Nil | Cons a (List a)
+
+Algebraic data types (ADTs) are created using sums and products types.
+
+Even more elaborate sum types are implemented in C++ using polymorphic class hierarchies. A family of classes with a common ancestor may be understood as one variant type, in which the vtable serves as a hidden tag. What in Haskell would be done by pattern matching on the constructor, and by calling specialized code, in C++ is accomplished by dispatching a call to a virtual function based on the vtable pointer. You will rarely see union used as a sum type in C++ because of severe limitations on what can go into a union.
+
+A typeclass defines a family of types (or type constructors) that support a common interface. For instance, the class of objects that support equality is defined as follows:
+  class Eq a where
+    (==) :: a -> a -> Bool
+
+Typeclasses are Haskell’s only mechanism for overloading functions (and operators).
+
+class Functor f where
+  fmap :: (a -> b) -> f a -> f b
+Accordingly, when declaring an instance of Functor, you have to give it a type constructor, as is the case with Maybe:
+  instance Functor Maybe where
+    fmap _ Nothing = Nothing
+    fmap f (Just x) = Just (f x)
+
+The composition of two functors is a functor whose fmap is the composition of the corresponding fmaps.
+
+Functors are morphisms in Cat (the category of categories).
+
+A cartesian product of categories is a category.
+
+If the product exists for any pair of objects, the mapping from those objects to the product is bifunctorial. This is true in general, and in Haskell in particular. Here’s the Bifunctor instance for a pair constructor — the simplest product type:
+  instance Bifunctor (,) where
+    bimap f g (x, y) = (f x, g y)
+By duality, a coproduct, if it’s defined for every pair of objects in a category, is also a bifunctor. In Haskell, this is exemplified by the Either type constructor being an instance of Bifunctor:
+  instance Bifunctor Either where
+    bimap f _ (Left x)  = Left (f x)
+    bimap _ g (Right y) = Right (g y)
+
+A monoidal category defines a binary operator (bifunctor) acting on objects, together with a unit object. 
+    Set is a monoidal category with respect to cartesian product, with the singleton set as a unit. 
+    Set is also a monoidal category with respect to disjoint union, with the empty set as a unit.
+
+If the derivation of the Functor instance for algebraic data types is so mechanical, can’t it be automated and performed by the compiler? Indeed, it can, and it is. You need to enable a particular Haskell extension by including this line at the top of your source file:
+  {-# LANGUAGE DeriveFunctor #-}
+  and then add deriving Functor to your data structure:
+  data Maybe a = Nothing | Just a deriving Functor -- the corresponding fmap will be implemented for you.
+  
+A monad is just a monoid in the category of endofunctors.
+
