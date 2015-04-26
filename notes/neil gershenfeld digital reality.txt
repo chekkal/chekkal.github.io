@@ -1,0 +1,32 @@
+Neil Gershenfeld: Digital Reality
+http://edge.org/conversation/neil_gershenfeld-digital-reality
+
+WORKING RELIABLY WITH UNRELIABLE PARTS
+
+Digital is one of the most widely misunderstood concepts.
+
+
+
+Digitilization of communication: Claud Shannon
+  Claude Shannon Threshold theorem:
+    For a linear increase in the resource used to represent the symbol, there is an exponential reduction in the error of you getting the symbol correctly as long as the noise is below a threshold.
+    => You can communicate reliably even though the communication medium is unreliable
+
+Digitilization of computing: John von Neumann
+  John von Neumann showed that you could compute reliably with an unreliable computing device by computing with a symbol. It was exactly applying Shannon to viewing a computation as a communication through the channel of the computer. 
+
+Digitilisation of fabrication:
+  MIT 1952 the first numerically-controlled milling machine
+  3D printers
+
+personalise fabrication
+
+fab lab: Anybody can make almost anything almost anywhere
+
+bits and atoms
+
+turnover and evolutionary pressure are essential
+
+
+
+
