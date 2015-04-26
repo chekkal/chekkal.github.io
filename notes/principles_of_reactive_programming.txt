@@ -1,0 +1,49 @@
+#principles_of_reactive_programming 
+
+Monad: A Monad M is a parametric type constructor M[T], with two operations flatMap and unit, that have to satisfy some laws.
+    trait M[T]{
+        def flatMap[S](f: T => M[S]):M[S]
+    }
+    def unit[T](x: T): M[T]
+
+for-expressions are converted into a sequence of map, flatMap and withFilter calls.
+    for(x <- e1) yield e2 <=> e1.map(x => e2) 
+    for(x <- e1 if f; s) yield e2 <=> for(x <- e1.withFilter(x => f); s) yield e2 
+    for(x <- e1; y <- e2; s) yield e3 <=> e1.flatMap(x => for (y <- e2; s) yield e3)
+
+
+for-loops are converted to a sequence of foreach calls.
+    for (i <- 1 until 3; j <- "abc") println(i + " " +j)
+    translates to:
+    (1 until 3) foreach (i => "abc" foreach (j => println(i + " " + j)))
+
+Substitution Model: Programs can be evaluated by "rewriting"
+    def f(x1,...,xn)=B; ... f(v1,...,vn) 
+    -->  
+    def f(x1,...,xn)=B; ... [v1/x1,...,vn/xn]B
+
+Referential Transparency
+    val x = E; val y = E
+    <=>
+    val x = E; val y = x
+
+
+Church-Russer Theorem in lambda calculus (Confluence: Difference evaluation path leads to the same result)
+    Rewriting can be done anywhere in a term, and all rewritings which terminate lead to the same solution.
+
+An object has a state if its behavior is influenced by its history.
+
+Operational Equivalence: Given two definitions x and y, we say that they are operationally equivalent if "no possible test" can distinguish between them.
+
+The Substitution Model doesn't hold for impure functions.
+
+Reinventing Loops:
+    def WHILE(condition: => Boolean)(command: => Unit): Unit = //params are passed by name so that they are reevaluated in each iteration
+        if (condition) {
+            command
+            WHILE(condition)(command) //A tail recursive call => constant stack size
+        } else ()
+
+Thread-Local is supported in Scala through class scala.util.DynamicVariable
+
+
