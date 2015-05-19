@@ -1,4 +1,5 @@
 #principles_of_reactive_programming 
+#RxJava: Reactive Extensions in Scala
 
 Monad: A Monad M is a parametric type constructor M[T], with two operations flatMap and unit, that have to satisfy some laws.
     trait M[T]{
@@ -68,5 +69,75 @@ Implementing zip using asyn wait
     def zip[S, R](that: Future[S], f:(T,S)=>R):Future[R] = async{
       f(await{this}, await{that})
     }
+
+    -----------------------------------------
+    |Iterable[T]       | Observable[T]|      |
+    -----------------------------------------
+    | pull             | push                |
+    | T next()         | onNext(T)           |
+    | throws Exception | onError(Exception)  |
+    | returns          | onCompleted()       |
+    -----------------------------------------
+
+Rx: Reactive Extensions
+Marble Diagrams
+
+Rx Observable Streams
+  Observable => Event Source
+  Observer   => Event Handler
+  Subscription => Check the state of subscription (in the Server Side) or Stop Listening (in the Client Side)
+
+With Observable:
+    - The Client code treats all interactions with the API as ASYNCHRONOUS
+    - The API implementation chooses whether something is "BLOCKING or NON-BLOCKING" AND "WHAT RESOURCES IT USES"
+
+             Asynchronous
+             Values
+             Events
+             Push
+  FUNCTIONAL REACTIVE
+    Lambdas
+    Closures
+    Pure
+    Composable
+
+ An Actor
+   - is an object with identity
+   - has a behavior
+   - only interacts using ASYNCHRONOUS Message passing
+
+Akka Actor under microscope ;-)
+  type Receive = PartialFunction[Any, Unit]
+  trait Actor {
+    implicit val self: ActorRef
+    def sender: ActorRef
+    def receive: Receive // "The current behavior of the actor"
+  }
+  abstract class ActorRef{
+    def !(msg: Any)(implicit sender: ActorRef = Actor.noSender): Unit
+    def tell(msg: Any, sender: ActorRef) = this.!(msg)(sender)
+  }
+  trait ActorContext {
+    def become(behavior: Receive, discardOld: Boolean = true): Unit // "change behavior"
+    def unbecome(): Unit //"change behavior"
+    def actorOf(p: Props, name: String): ActorRef //"create a child actor"
+    def stop(a: ActorRef): Unit //"kill an actor"
+  }
+
+AsyncHttpClient: The Async Http Client library purpose is to allow Java applications to easily execute HTTP requests and asynchronously process the HTTP responses. The library also supports the WebSocket Protocol.
+
+Jsoup: A Java HTML Parser
+
+Actor is the most encapsulated form of Object Orientation
+
+An Actor is Single Threaded and processing one message is the atomic unit of execution
+
+A reactive application is non-blocking & event driven top to bottom
+
+Actors are run bya dispatcher (we can get access to it via context.dispatcher) -potentially shared- which can also run Futures 
+
+In Akka the system is the container in which all actors run
+
+
 
 
