@@ -1,0 +1,9 @@
+fqdn => Fully Qualified Domain Name
+
+etc  => Abbrev for etcetera, another backronym would be: "Editable Text Configuration" 
+var  => Abbrev for variable
+sys  => Abbrev for system
+usr  => Abbrev for user
+lib  => Abbrev for library
+
+
