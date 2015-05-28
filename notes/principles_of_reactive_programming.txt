@@ -1,6 +1,13 @@
 #principles_of_reactive_programming 
 #RxJava: Reactive Extensions in Scala
 
+The four traits that make up reactive applications are: 
+  responsive: react to users
+  scalable: react to load
+  resilient: react to failure
+  event-driven: react to events
+--from http://manning.com/bernhardt/RWAwithPlay_MEAP_ch01.pdf
+
 Monad: A Monad M is a parametric type constructor M[T], with two operations flatMap and unit, that have to satisfy some laws.
     trait M[T]{
         def flatMap[S](f: T => M[S]):M[S]
