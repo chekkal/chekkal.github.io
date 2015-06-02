@@ -1,0 +1,5 @@
+Redis is sometimes described as "Memcached on steroids"
+
+Redis: An advanced key-value store, also called a data structure server, with lists, ordered sets etc.
+
+
