@@ -6,4 +6,5 @@ sys  => Abbrev for system
 usr  => Abbrev for user
 lib  => Abbrev for library
 
-
+use dstat to report network bandwidth and some tcp statistics
+dstat --tcp -nt
