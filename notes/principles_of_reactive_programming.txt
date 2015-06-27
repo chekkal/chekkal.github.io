@@ -1,5 +1,9 @@
 #principles_of_reactive_programming 
 #RxJava: Reactive Extensions in Scala
+#http://www.oracle.com/technetwork/articles/java/jonasboner-1537758.html
+
+env JAVA_OPTS="-Dakka.loglevel=DEBUG -Dakka.actor.debug.receive=on" sbt
+If you want very detailed logging of user-level messages then wrap your actors' behaviors with akka.event.LoggingReceive (ensure -Dakka.actor.debug.receive=on)
 
 The four traits that make up reactive applications are: 
   responsive: react to users
@@ -145,6 +149,8 @@ Actors are run bya dispatcher (we can get access to it via context.dispatcher) -
 
 In Akka the system is the container in which all actors run
 
+Actors in Akka implement a share-nothing architecture. They can be seen as the ultimate object orientation, encapsulating state and behavior. But in contrast to what happens with normal Java classes, every state change is local and cannot in any way affect any other part of the system, which is a big relief. Actors are also much more decoupled than standard Java objects: if one actor crashes (fails with an exception), it will not affect any other part of the system. So if an actor fails, you know where to look, because the failure is completely isolated. When you add the actor style of fault tolerance, in which actors that you create are automatically linked to each other in a “supervisor hierarchy” tree, you get a system that can monitor and heal itself—a very robust system. -- Jonas Bonér
 
+In Akka: The Tree hierarchy for supervision == The Tree hierarchy for creation
 
-
+Mandatory Parental Supervision
