@@ -1,5 +1,5 @@
 (* Software Foundations *)
-(* Exercise: 4 stars (mult comm)) 
+(* Exercise: 4 stars (mult comm) *) 
 Theorem  plus_0_r: forall n: nat, n+0=n.
 Proof.
     intros. induction n as [|n'].
